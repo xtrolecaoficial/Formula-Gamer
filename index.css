@@ -1,0 +1,435 @@
+/* ==========================================
+   1. VARIABLES DE COLOR Y MODO OSCURO
+   ========================================== */
+:root {
+  --bg-color: #121212;
+  --surface-color: #1e1e1e;
+  --card-bg: #282828;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --accent-color: #bb86fc;
+  --accent-hover: #9955e8;
+  --border-color: #333333;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+body:not(.dark-mode) {
+  --bg-color: #f4f6f8;
+  --surface-color: #ffffff;
+  --card-bg: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --accent-color: #6200ee;
+  --accent-hover: #4b00b5;
+  --border-color: #e0e0e0;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================
+   2. ESTILOS GENERALES Y RESETS
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================
+   3. BARRA DE NAVEGACIÓN (HEADER)
+   ========================================== */
+header {
+  background-color: var(--surface-color);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+nav a:hover {
+  color: var(--accent-color);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+select#language-select {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-theme {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-theme:hover {
+  border-color: var(--accent-color);
+}
+
+/* ==========================================
+   4. SECCIÓN HERO Y BÚSQUEDA
+   ========================================== */
+.hero {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hero h2 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 20px auto;
+}
+
+.search-box input {
+  width: 100%;
+  max-width: 450px;
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 1rem;
+  outline: none;
+}
+
+.search-box input:focus {
+  border-color: var(--accent-color);
+}
+
+/* ==========================================
+   5. CONTENEDOR Y TARJETAS
+   ========================================== */
+.main-container {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 20px;
+  flex: 1;
+}
+
+.section-title {
+  margin-bottom: 25px;
+  font-size: 1.6rem;
+  border-left: 4px solid var(--accent-color);
+  padding-left: 10px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-color);
+}
+
+.card-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.badge {
+  align-self: flex-start;
+  background-color: var(--accent-color);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.card h3 {
+  margin-bottom: 8px;
+}
+
+.card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.card-btn {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.card-btn:hover {
+  background-color: var(--accent-hover);
+}
+
+/* ==========================================
+   6. VISTA DE GUÍA Y DETALLES
+   ========================================== */
+.btn-volver {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.btn-volver:hover {
+  background-color: var(--surface-color);
+  border-color: var(--accent-color);
+}
+
+.guia-header {
+  background-color: var(--surface-color);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 25px;
+}
+
+.guia-banner-img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.guia-desc {
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+.guia-seccion {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.guia-seccion h3 {
+  margin-bottom: 15px;
+  color: var(--accent-color);
+}
+
+.guia-img-container {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.guia-sec-img {
+  max-width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.guia-seccion ul {
+  padding-left: 20px;
+}
+
+.guia-seccion li {
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+/* ==========================================
+   7. MODALES Y SECCIÓN INFO
+   ========================================== */
+.info-section {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: var(--surface-color);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--surface-color);
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 450px;
+  width: 90%;
+  position: relative;
+  border: 1px solid var(--border-color);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.modal-form input, .modal-form textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  outline: none;
+}
+
+/* ==========================================
+   8. BOTÓN CUENTA Y FORMULARIOS DE AUTENTICACIÓN
+   ========================================== */
+.btn-auth {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-auth:hover {
+  background-color: var(--accent-hover);
+}
+
+.auth-container {
+  max-width: 400px;
+}
+
+.auth-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+
+.tab-btn.active {
+  color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+
+.auth-form h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+/* ==========================================
+   9. PIE DE PÁGINA
+   ========================================== */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--surface-color);
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: auto;
+}
