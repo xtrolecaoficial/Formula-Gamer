@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formula Gamer - Guías y Tips de Videojuegos</title>
+  <link rel="stylesheet" href="indes.css">
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN Y CABECERA -->
+  <header>
+    <div class="logo">
+      <h1>🎮 Formula Gamer</h1>
+    </div>
+
+    <nav>
+      <a href="#" id="nav-inicio" onclick="mostrarInicio()">Inicio</a>
+      <a href="#" id="open-modal-btn">Aportar Guía</a>
+      <a href="#seccion-info" id="nav-info">Información</a>
+    </nav>
+
+    <div class="header-controls">
+      <!-- Botón de Cuenta (Abre el Modal de Login/Registro) -->
+      <button id="open-auth-btn" class="btn-auth">👤 Cuenta</button>
+
+      <!-- Selector de Idioma -->
+      <select id="language-select">
+        <option value="es">ES 🇪🇸</option>
+        <option value="en">EN 🇺🇸</option>
+      </select>
+
+      <!-- Botón de Modo Oscuro/Claro -->
+      <button id="theme-toggle" class="btn-theme">🌙 Modo Noche</button>
+    </div>
+  </header>
+
+  <!-- SECCIÓN HERO -->
+  <section class="hero">
+    <h2 id="hero-title">¡Bienvenido a Formula Gamer!</h2>
+    <p id="hero-desc">
+      Tu fuente definitiva de conocimiento gamer. Nuestra misión es desglosar cada mecánica, secreto y desafío de tus videojuegos favoritos.
+    </p>
+
+    <div class="search-box">
+      <input 
+        type="text" 
+        id="search-input" 
+        placeholder="🔍 Buscar juego o categoría..." 
+        onkeyup="buscarGuia()"
+      >
+    </div>
+  </section>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="main-container">
+
+    <!-- VISTA DE TARJETAS -->
+    <div id="vista-inicio">
+      <h2 id="section-title" class="section-title">Selecciona un juego para ver sus Guías</h2>
+
+      <div class="cards-grid">
+        
+        <div class="card" data-game="minecraft">
+          <img src="images (1).jpeg" alt="Minecraft" class="card-img">
+          <span class="badge">Sandbox</span>
+          <h3>Minecraft</h3>
+          <p id="mc-desc">Granjas automáticas, mecanismos de Redstone, consejos para supervivencia y estrategias PvP.</p>
+          <button class="card-btn btn-mc" onclick="cargarGuia('minecraft')">Ver Guías y Tips</button>
+        </div>
+
+        <div class="card" data-game="fortnite">
+          <img src="images (4).jpeg" alt="Fortnite" class="card-img">
+          <span class="badge">Battle Royale</span>
+          <h3>Fortnite</h3>
+          <p id="fn-desc">Técnicas de construcción rápida, rotación en mapa, mejores armas y consejos de tradeo.</p>
+          <button class="card-btn btn-fn" onclick="cargarGuia('fortnite')">Ver Guías y Tips</button>
+        </div>
+
+        <div class="card" data-game="brawl">
+          <img src="images (7).jpeg" alt="Brawl Stars" class="card-img">
+          <span class="badge">MOBA / Acción</span>
+          <h3>Brawl Stars</h3>
+          <p id="bs-desc">Combos de Brawlers, mejores selecciones por mapa, economía de gemas y eventos.</p>
+          <button class="card-btn btn-bs" onclick="cargarGuia('brawl')">Ver Guías y Tips</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VISTA DINÁMICA DE GUÍAS -->
+    <div id="vista-guia" style="display: none;">
+      <button class="btn-volver" id="btn-volver" onclick="mostrarInicio()">⬅️ Volver al Inicio</button>
+      <div id="contenido-guia"></div>
+    </div>
+
+    <!-- SECCIÓN DE INFORMACIÓN -->
+    <section id="seccion-info" class="info-section">
+      <h3 id="info-title">Información de la página</h3>
+      <p id="info-desc">Página web creada para guiar a los nuevos usuarios en el mundo de los videojuegos.</p>
+    </section>
+
+  </main>
+
+  <!-- MODAL DE APORTAR GUÍA -->
+  <div id="modal-aporte" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span id="close-modal-btn" class="close-btn">&times;</span>
+      <h3 id="modal-title">¡Aporta tu propia Guía!</h3>
+      <p id="modal-desc">Envíanos tus trucos o consejos para publicarlos en Formula Gamer.</p>
+
+      <div class="modal-form">
+        <input type="text" id="nombre-usuario" placeholder="Tu apodo/gamertag">
+        <textarea id="texto-aporte" rows="4" placeholder="Escribe aquí tu tip o truco..."></textarea>
+        <button id="btn-enviar-modal" class="card-btn" onclick="enviarAporte()">Enviar Aporte</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE INICIO DE SESIÓN Y REGISTRO -->
+  <div id="modal-auth" class="modal" style="display: none;">
+    <div class="modal-content auth-container">
+      <span id="close-auth-btn" class="close-btn">&times;</span>
+      
+      <!-- Pestañas para alternar -->
+      <div class="auth-tabs">
+        <button id="tab-login" class="tab-btn active" onclick="cambiarTabAuth('login')">Iniciar Sesión</button>
+        <button id="tab-register" class="tab-btn" onclick="cambiarTabAuth('register')">Crear Cuenta</button>
+      </div>
+
+      <!-- Formulario 1: Iniciar Sesión -->
+      <form id="form-login" class="modal-form auth-form" onsubmit="iniciarSesion(event)">
+        <h3>Bienvenido de nuevo</h3>
+        <input type="text" id="login-user" placeholder="Usuario o Gamertag" required>
+        <input type="password" id="login-pass" placeholder="Contraseña" required>
+        <button type="submit" class="card-btn">Ingresar</button>
+      </form>
+
+      <!-- Formulario 2: Crear Cuenta -->
+      <form id="form-register" class="modal-form auth-form" style="display: none;" onsubmit="crearCuenta(event)">
+        <h3>Únete a Formula Gamer</h3>
+        <input type="text" id="reg-user" placeholder="Nombre de usuario / Gamertag" required>
+        <input type="email" id="reg-email" placeholder="Correo electrónico" required>
+        <input type="password" id="reg-pass" placeholder="Contraseña" required>
+        <input type="password" id="reg-pass-confirm" placeholder="Confirmar contraseña" required>
+        <button type="submit" class="card-btn">Registrarse</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <p id="footer-text">© Formula Gamer - Guías y Tips de Videojuegos</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
